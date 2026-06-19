@@ -1043,14 +1043,17 @@
     const light    = getVal('light');
     const camera   = getVal('camera');
     const mood     = getVal('mood');
+    const artstyle = getVal('artstyle');
     const background = getVal('background');
     const placement = getVal('placement');
     const ratio = getVal('ratio');
     const resolution = getVal('resolution');
     const textpreset = getVal('textpreset');
+    const font = getVal('font');
     const customTextOverlay = window._textOverlay || '';
     const additionalDetails = document.getElementById('additional-details') ? document.getElementById('additional-details').value.trim() : '';
     let parts = [];
+    if (artstyle) parts.push(artstyle);
     if (camera)   parts.push(camera);
     if (product)  parts.push(product);
     if (background) parts.push('set ' + background);
@@ -1058,6 +1061,7 @@
     if (palette)  parts.push(palette);
     if (mood)     parts.push(mood);
     if (light)    parts.push('lit by ' + light);
+    if (font)     parts.push('typography: ' + font);
     if (ratio)    parts.push(ratio);
     if (resolution) parts.push(resolution);
     const overlayText = customTextOverlay || textpreset;
@@ -1217,7 +1221,7 @@
 
   function resetAll() {
     saveUndoState();
-    ['product','palette','light','camera','mood','outfit-f','outfit-girls','outfit-m','outfit-boys','accessories','shoes-f','shoes-m','shoes-kids','background','ratio','resolution','hairstyle-f','hairstyle-m','makeup','pose','props','textpreset','placement','patch-style','patch-shape','patch-font','patch-color','patch-bg','editorial-style','editorial-font','editorial-headline','editorial-quality'].forEach(g => {
+    ['product','palette','light','camera','mood','artstyle','font','outfit-f','outfit-girls','outfit-m','outfit-boys','accessories','shoes-f','shoes-m','shoes-kids','background','ratio','resolution','hairstyle-f','hairstyle-m','makeup','pose','props','textpreset','placement','patch-style','patch-shape','patch-font','patch-color','patch-bg','editorial-style','editorial-font','editorial-headline','editorial-quality'].forEach(g => {
       document.querySelectorAll(`.pill[data-g="${g}"]`).forEach(p => p.className = p.className.replace(/\bon-\w+/g,'').trim());
       const row = document.getElementById('custom-row-' + g);
       if (row) row.style.display = 'none';
@@ -1246,7 +1250,7 @@
 
 
   function loadPreset(name) {
-    ['product','palette','light','camera','mood','outfit-f','outfit-girls','outfit-m','outfit-boys','accessories','shoes-f','shoes-m','shoes-kids','background','ratio','resolution','hairstyle-f','hairstyle-m','makeup','pose','props','textpreset','placement','patch-style','patch-shape','patch-font','patch-color','patch-bg','editorial-style','editorial-font','editorial-headline','editorial-quality'].forEach(g => {
+    ['product','palette','light','camera','mood','artstyle','font','outfit-f','outfit-girls','outfit-m','outfit-boys','accessories','shoes-f','shoes-m','shoes-kids','background','ratio','resolution','hairstyle-f','hairstyle-m','makeup','pose','props','textpreset','placement','patch-style','patch-shape','patch-font','patch-color','patch-bg','editorial-style','editorial-font','editorial-headline','editorial-quality'].forEach(g => {
       document.querySelectorAll('.pill[data-g="' + g + '"]').forEach(p => p.className = p.className.replace(/\bon-\w+/g,'').trim());
       const row = document.getElementById('custom-row-' + g);
       if (row) row.style.display = 'none';
